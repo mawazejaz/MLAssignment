@@ -1,0 +1,138 @@
+Certainly! Here's a detailed explanation of the code, referencing specific sections:
+
+```python
+# Genetic Algorithm parameters
+POPULATION_SIZE = 100
+CITIES = [(2, 3), (5, 8), (1, 6), (7, 2), (9, 5), (4, 1)]  # Coordinates of cities
+city_names = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+GENERATIONS = 50
+MUTATION_RATE = 0.01
+```
+This section defines the parameters for the Genetic Algorithm. 
+It includes the population size, the coordinates of the cities, 
+the names assigned to the cities, the number of generations, and the mutation rate.
+
+```python
+print("##########################################################")
+# Print the list of cities with names and coordinates
+for i, city in enumerate(CITIES):
+    city_name = city_names[i]
+    print(f"City {city_name}: {city[0]}, {city[1]}")
+print("##########################################################")
+```
+This code block prints the list of cities with their assigned names and coordinates. 
+It iterates over the `CITIES` list using `enumerate()` to access both the index and the city 
+coordinates. The corresponding city name is retrieved from the `city_names` string.
+The output is printed in the format "City [city_name]: [x-coordinate], [y-coordinate]".
+
+```python
+def calculate_distance(city1, city2):
+    """Calculate the Euclidean distance between two cities"""
+    x1, y1 = city1
+    x2, y2 = city2
+    return math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
+```
+This function calculates the Euclidean distance between two cities given their coordinates. 
+It uses the Euclidean distance formula `(sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2))` to compute the
+distance.
+
+```python
+def calculate_route_distance(route):
+    """Calculate the total distance of a route"""
+    total_distance = 0
+    for i in range(len(route)):
+        current_city = route[i]
+        next_city = route[(i + 1) % len(route)]
+        total_distance += calculate_distance(current_city, next_city)
+    return total_distance
+```
+This function calculates the total distance of a route (sequence of cities).
+It iterates over the `route` list and calculates the distance between each pair of consecutive 
+cities using the `calculate_distance()` function. The distances are accumulated to compute the 
+total distance of the route.
+
+```python
+def generate_individual():
+    """Generate a random individual (route)"""
+    individual = CITIES[:]
+    random.shuffle(individual)
+    return individual
+```
+This function generates a random individual (route) by shuffling the `CITIES` list. 
+It creates a copy of the `CITIES` list using the `[:]` slicing notation to avoid modifying the
+original list. The `random.shuffle()` function is then used to randomly reorder the cities in
+the individual.
+
+```python
+def evaluate_fitness(individual):
+    """Evaluate the fitness of an individual (route)"""
+    distance = calculate_route_distance(individual)
+    return 1 / distance  # Fitness is inversely proportional to the distance
+```
+This function evaluates the fitness of an individual (route) by calculating the total distance 
+of the route using the `calculate_route_distance()` function. The fitness is defined as the inverse 
+of the distance, so smaller distances result in higher fitness values.
+
+```python
+def crossover(parent1, parent2):
+    """Perform ordered crossover between two parents"""
+    start = random.randint(0, len(parent1) - 1)
+    end = random.randint(start + 1,
+
+ len(parent1))
+    child1 = [-1] * len(parent1)
+    child2 = [-1] * len(parent1)
+
+    # Copy the selected portion from parents to children
+    child1[start:end] = parent1[start:end]
+    child2[start:end] = parent2[start:end]
+
+    # Fill in the remaining cities in the order of the other parent
+    for i in range(len(parent2)):
+        index = (end + i) % len(parent2)
+        city = parent2[index]
+        if city not in child1:
+            child1[child1.index(-1)] = city
+        if city not in child2:
+            child2[child2.index(-1)] = city
+
+    return child1, child2
+```
+This function performs ordered crossover between two parents. 
+It randomly selects a portion of the `parent1` route, defined by a start and end index. 
+It then copies the selected portion from `parent1` to `child1` and from `parent2` to `child2`.
+
+Next, it fills in the remaining cities in the order they appear in `parent2`. 
+The remaining cities are added to `child1` and `child2` only if they are not already present. 
+This ensures that each city appears exactly once in the offspring routes.
+
+The function returns the two offspring routes, `child1` and `child2`.
+
+```python
+def mutate(individual):
+    """Swap two randomly selected cities in an individual"""
+    mutated_individual = individual[:]
+    index1 = random.randint(0, len(mutated_individual) - 1)
+    index2 = random.randint(0, len(mutated_individual) - 1)
+    mutated_individual[index1], mutated_individual[index2] = mutated_individual[index2], mutated_individual[index1]
+    return mutated_individual
+```
+This function performs mutation on an individual (route) by randomly swapping two cities.
+It creates a copy of the `individual` to avoid modifying the original list. 
+Two random indices are generated, and the cities at those indices are swapped. 
+The mutated individual is then returned.
+
+The remaining code applies the Genetic Algorithm to solve the TSP:
+
+- The initial population is generated by calling `generate_individual()` multiple times.
+- The main loop runs for the specified number of generations (`GENERATIONS`).
+- In each generation:
+  - Fitness scores are evaluated for each individual in the population.
+  - Parents for crossover are selected from the population based on their fitness scores.
+  - Crossover and mutation are applied to create offspring.
+  - The population is replaced with the offspring.
+  - The best individual in the current generation is determined based on fitness.
+  - The best distance is printed for the current generation.
+
+Finally, the overall best individual (route) and its corresponding distance are determined, 
+and the results are printed.
