@@ -1,4 +1,5 @@
-The provided code is an implementation of a Genetic Algorithm to solve the Traveling Salesman Problem (TSP) for a fixed set of cities with their coordinates. Here's a breakdown of the code:
+The provided code is an implementation of a Genetic Algorithm to solve the Traveling Salesman Problem (TSP) for a fixed 
+set of cities with their coordinates. Here's a breakdown of the code:
 
 1. Genetic Algorithm Parameters:
    - `POPULATION_SIZE`: The size of the population (number of individuals).

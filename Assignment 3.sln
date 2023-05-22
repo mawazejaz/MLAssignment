@@ -5,7 +5,7 @@ VisualStudioVersion = 17.5.33516.290
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Assignment 3_genetic_algo", "Assignment 3\Assignment 3_genetic_algo.pyproj", "{4079A18F-3842-421B-881C-4D990F0168C0}"
 EndProject
-Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Assignment 2", "Assignment 2\Assignment 2.pyproj", "{62584006-1128-4B58-B93E-E8A2F40AEFE3}"
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Assignment 2_GeneticAlgo", "Assignment 2\Assignment 2_GeneticAlgo.pyproj", "{62584006-1128-4B58-B93E-E8A2F40AEFE3}"
 EndProject
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Assignment 1_ Apriori_algorithm", "Assignment 1\Assignment 1_ Apriori_algorithm.pyproj", "{79001780-CDC5-4818-910E-FBD46292B835}"
 EndProject
