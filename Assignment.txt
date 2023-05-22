@@ -1,0 +1,7 @@
+
+
+Assignment 1 # Genetic Algorithm parameters
+Assignment 2 # Decesion tree and ID3 
+Assignment 3 # Genetic Algorithm parameters
+
+
