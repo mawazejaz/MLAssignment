@@ -7,7 +7,7 @@ Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Assignment 3_genetic_algo",
 EndProject
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Assignment 2", "Assignment 2\Assignment 2.pyproj", "{62584006-1128-4B58-B93E-E8A2F40AEFE3}"
 EndProject
-Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Assignment 1", "Assignment 1\Assignment 1.pyproj", "{79001780-CDC5-4818-910E-FBD46292B835}"
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Assignment 1_ Apriori_algorithm", "Assignment 1\Assignment 1_ Apriori_algorithm.pyproj", "{79001780-CDC5-4818-910E-FBD46292B835}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C086F3E5-EEA9-4151-A886-D20BCC8B8A22}"
 	ProjectSection(SolutionItems) = preProject
