@@ -152,7 +152,7 @@ class Apriori:
         return big_rule_list
 
 
-model = Apriori(transactions, min_support=0.3, min_confidence=0.5)
+model = Apriori(transactions, min_support=0.2, min_confidence=0.5)
 
 L = model.generate_L()
 
