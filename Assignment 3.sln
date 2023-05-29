@@ -16,6 +16,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Chessgmae", "Chessgmae\Chessgmae.pyproj", "{640E9AA0-4EE8-4198-8C33-DF9D4F771892}"
 EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "WumpusWorld", "WumpusWorld\WumpusWorld.pyproj", "{E0BCF4E1-2E7E-4B4B-94FC-B2934E001AFD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,6 +32,8 @@ Global
 		{79001780-CDC5-4818-910E-FBD46292B835}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{640E9AA0-4EE8-4198-8C33-DF9D4F771892}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{640E9AA0-4EE8-4198-8C33-DF9D4F771892}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0BCF4E1-2E7E-4B4B-94FC-B2934E001AFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0BCF4E1-2E7E-4B4B-94FC-B2934E001AFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
