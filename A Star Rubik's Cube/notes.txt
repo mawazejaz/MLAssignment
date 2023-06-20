@@ -1,0 +1,12 @@
+
+In this code, the Rubik's Cube state is represented as a string, where each character represents the color of a specific cubelet. The goal state is defined as a constant string goal_state.
+
+The A* algorithm is implemented using a priority queue open_set to store the nodes to be expanded. The CubeNode class represents a node in the search tree, containing the current cube state, the cost to reach the node (g_cost), the estimated heuristic cost from the node to the goal (h_cost), a reference to the parent node, and the action taken to reach the current state.
+
+The heuristic function calculates the Manhattan distance between the current state and the goal state. The apply_action function applies a given action to a cube state, producing a new state. The get_actions function returns a list of valid actions that can be applied to the cube.
+
+The A* algorithm iteratively expands nodes from the open_set, applying each valid action and adding the resulting states to the open_set if they have not been visited before. The algorithm terminates when the goal state is reached or when there are no more nodes in the open_set. If a solution is found, the code constructs the solution path by following the parent references from the goal node.
+
+Finally, the code tests the solver by providing an initial state and prints the solution if one is found.
+
+Note that this implementation assumes a solved state with the following ordering of cubelets: the first nine characters represent the top face, the next nine represent the middle layer, and the last nine represent the bottom face. The colors are represented by single characters, such as 'R' for red, 'G' for green, 'Y' for yellow, 'B' for blue, 'O' for orange, and 'W' for white.

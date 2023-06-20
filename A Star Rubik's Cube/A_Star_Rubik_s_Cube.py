@@ -1,62 +1,82 @@
-# Import necessary libraries
-from copy import deepcopy
+from queue import PriorityQueue
 
-# Rubik's Cube class
-class RubiksCube:
-    def __init__(self):
-        # Initialize the cube state
-        self.state = [['w', 'w', 'w', 'w', 'w', 'w', 'w', 'w', 'w'],
-                      ['o', 'o', 'o', 'o', 'o', 'o', 'o', 'o', 'o'],
-                      ['g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g'],
-                      ['r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r'],
-                      ['b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b'],
-                      ['y', 'y', 'y', 'y', 'y', 'y', 'y', 'y', 'y']]
+class CubeNode:
+    def __init__(self, cube, g_cost, h_cost, parent=None, action=None):
+        self.cube = cube
+        self.g_cost = g_cost
+        self.h_cost = h_cost
+        self.parent = parent
+        self.action = action
     
-    # Function to rotate a face clockwise
-    def rotate_face_clockwise(self, face):
-        face[0][0], face[2][0], face[2][2], face[0][2] = face[2][0], face[2][2], face[0][2], face[0][0]
-        face[0][1], face[1][0], face[2][1], face[1][2] = face[1][0], face[2][1], face[1][2], face[0][1]
-    
-    # Function to rotate a face counter-clockwise
-    def rotate_face_counter_clockwise(self, face):
-        face[0][0], face[0][2], face[2][2], face[2][0] = face[0][2], face[2][2], face[2][0], face[0][0]
-        face[0][1], face[1][2], face[2][1], face[1][0] = face[1][2], face[2][1], face[1][0], face[0][1]
-    
-    # Function to rotate the whole cube
-    def rotate_cube(self, direction):
-        if direction == 'U':
-            self.rotate_face_clockwise(self.state[0])
-            temp = deepcopy(self.state[1][0])
-            self.state[1][0] = deepcopy(self.state[3][0])
-            self.state[3][0] = deepcopy(self.state[2][0])
-            self.state[2][0] = deepcopy(self.state[4][0])
-            self.state[4][0] = deepcopy(temp)
-        elif direction == 'U\'':
-            self.rotate_face_counter_clockwise(self.state[0])
-            temp = deepcopy(self.state[1][0])
-            self.state[1][0] = deepcopy(self.state[4][0])
-            self.state[4][0] = deepcopy(self.state[2][0])
-            self.state[2][0] = deepcopy(self.state[3][0])
-            self.state[3][0] = deepcopy(temp)
-        # Implement rotation for other directions (F, F', B, B', L, L', R, R', D, D')
-        # ...
-    
-    # Function to print the cube state
-    def print_cube(self):
-        for face in self.state:
-            for row in face:
-                print(row, end=' ')
-            print()
-    
-    # Function to play the Rubik's Cube
-    def play(self):
-        while True:
-            self.print_cube()
-            move = input("Enter move (U, U', F, F', B, B', L, L', R, R', D, D'): ")
-            self.rotate_cube(move)
+    def __lt__(self, other):
+        return (self.g_cost + self.h_cost) < (other.g_cost + other.h_cost)
 
-# Create a Rubik's Cube instance
-cube = RubiksCube()
+def solve_cube(cube):
+    # Define the goal state
+    goal_state = 'RRRRRRRRRGGGYYYBBBGGGYYYBBBGGGYYYBBBGGGYYYBBBOOOOOOOOOWWW'
 
-# Play the Rubik's Cube
-cube.play()
+    # Heuristic function (Manhattan distance)
+    def heuristic(state):
+        dist = 0
+        for i in range(len(state)):
+            if state[i] != goal_state[i]:
+                dist += 1
+        return dist
+
+    # Action functions
+    def apply_action(state, action):
+        if action == 'U':
+            state = state[9:] + state[:9]
+        elif action == 'D':
+            state = state[18:] + state[:18]
+        elif action == 'L':
+            state = state[:9] + state[27:36] + state[9:27] + state[36:]
+        elif action == 'R':
+            state = state[:27] + state[36:45] + state[27:36] + state[45:]
+        elif action == 'F':
+            state = state[:18] + state[27:30] + state[18:21] + state[30:33] + state[21:24] + state[33:]
+        elif action == 'B':
+            state = state[:24] + state[33:36] + state[24:27] + state[36:39] + state[27:30] + state[39:]
+        return state
+
+    def get_actions():
+        return ['U', 'D', 'L', 'R', 'F', 'B']
+
+    # A* algorithm
+    start_node = CubeNode(cube, 0, heuristic(cube))
+    open_set = PriorityQueue()
+    open_set.put(start_node)
+    closed_set = set()
+
+    while not open_set.empty():
+        current_node = open_set.get()
+        current_state = current_node.cube
+
+        if current_state == goal_state:
+            # Goal state reached, construct solution path
+            solution_path = []
+            while current_node.parent is not None:
+                solution_path.insert(0, current_node.action)
+                current_node = current_node.parent
+            return solution_path
+
+        closed_set.add(current_state)
+
+        for action in get_actions():
+            new_state = apply_action(current_state, action)
+            if new_state not in closed_set:
+                g_cost = current_node.g_cost + 1
+                h_cost = heuristic(new_state)
+                new_node = CubeNode(new_state, g_cost, h_cost, current_node, action)
+                open_set.put(new_node)
+
+    # No solution found
+    return None
+
+# Test the solver
+initial_state = 'RRRRRRRRRGGGYYYBBBGGGYYYBBBGGGYYYBBBGGGYYYBBBOOOOOOOOOWWW'
+solution = solve_cube(initial_state)
+if solution is not None:
+    print("Solution found! Moves:", solution)
+else:
+    print("No solution found.")
