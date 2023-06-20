@@ -22,6 +22,10 @@ Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "B&B to solve TSP", "B&B to 
 EndProject
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "A Star Rubik's Cube", "A Star Rubik's Cube\A Star Rubik's Cube.pyproj", "{2E8CAAAC-D11B-45C0-90F6-9747BC0D6D08}"
 EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "DecesionTree", "DecesionTree\DecesionTree.pyproj", "{B552DECC-3A2E-440D-BA2E-05D21BDDC8E9}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Assignment_1_appriorii_descession_Tree", "Assignment_1_appriorii_descession_Tree\Assignment_1_appriorii_descession_Tree.pyproj", "{3E873D26-7205-4150-974D-1D129C312803}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,6 +46,10 @@ Global
 		{46AB395B-2255-4F21-A011-7CB81DAB12E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2E8CAAAC-D11B-45C0-90F6-9747BC0D6D08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2E8CAAAC-D11B-45C0-90F6-9747BC0D6D08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B552DECC-3A2E-440D-BA2E-05D21BDDC8E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B552DECC-3A2E-440D-BA2E-05D21BDDC8E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E873D26-7205-4150-974D-1D129C312803}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E873D26-7205-4150-974D-1D129C312803}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
